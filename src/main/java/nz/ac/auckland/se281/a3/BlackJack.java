@@ -1,6 +1,5 @@
 package nz.ac.auckland.se281.a3;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,8 +81,12 @@ public class BlackJack {
 	protected void initBots() {
 		Bot bot1 = new Bot("Bot1");
 		Bot bot2 = new Bot("Bot2");
-		// String botStrategyString = getBotStrategy(); // UNCOMMENT THIS
+
+		String botStrategyString = getBotStrategy(); // UNCOMMENT THIS
 		// create and set Bots strategy here
+		bot1.strategyFactory(botStrategyString);
+		bot1.strategyFactory(botStrategyString);
+
 		players.add(bot1);
 		players.add(bot2);
 	}
