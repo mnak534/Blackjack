@@ -15,11 +15,8 @@ public class LowRiskStrategy implements Strategy {
 
 	@Override
 	public Action action() {
-		// get the current score
-		int score = hand.getScore();
-
 		// if the score is higher or equal to 17, it holds
-		if (score >= 17) {
+		if (hand.getScore() >= 17) {
 			return Action.HOLD;
 		}
 		// else, it hits

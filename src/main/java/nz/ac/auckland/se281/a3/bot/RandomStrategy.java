@@ -33,6 +33,7 @@ public class RandomStrategy implements Strategy {
 		int n = rand.nextInt(100);
 
 		// Random strategy bets randomly between 1 and 100 chips (inclusive).
+		System.out.println("Bet amount " + (n + 1));
 		return n + 1;
 	}
 
