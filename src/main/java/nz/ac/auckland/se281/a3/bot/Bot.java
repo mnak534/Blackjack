@@ -11,8 +11,7 @@ import nz.ac.auckland.se281.a3.Player;
 
 public class Bot extends Player {
 
-	private static Strategy strategy;
-	private Hand hand = this.getHand();
+	private Strategy strategy;
 
 	public Bot(String name) {
 		super(name);
@@ -35,10 +34,10 @@ public class Bot extends Player {
 			this.strategy = new RandomStrategy();
 			break;
 		case "LR":
-			this.strategy = new LowRiskStrategy(hand);
+			this.strategy = new LowRiskStrategy(this.getHand());
 			break;
 		case "HR":
-			this.strategy = new HighRiskStrategy(hand);
+			this.strategy = new HighRiskStrategy(this.getHand());
 			break;
 		}
 	}
