@@ -7,14 +7,8 @@ import nz.ac.auckland.se281.a3.Participant.Action;
 
 public class LowRiskStrategy implements Strategy {
 
-	private Hand hand;
-
-	public LowRiskStrategy(Hand hand) {
-		this.hand = hand;
-	}
-
 	@Override
-	public Action action() {
+	public Action action(Hand hand) {
 		// if the score is higher or equal to 17, it holds
 		if (hand.getScore() >= 17) {
 			return Action.HOLD;

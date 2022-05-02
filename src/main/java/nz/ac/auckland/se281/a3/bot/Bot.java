@@ -19,7 +19,7 @@ public class Bot extends Player {
 
 	@Override
 	public Action decideAction(Hand hand) {
-		return strategy.action();
+		return strategy.action(hand);
 	}
 
 	@Override
@@ -34,10 +34,10 @@ public class Bot extends Player {
 			this.strategy = new RandomStrategy();
 			break;
 		case "LR":
-			this.strategy = new LowRiskStrategy(this.getHand());
+			this.strategy = new LowRiskStrategy();
 			break;
 		case "HR":
-			this.strategy = new HighRiskStrategy(this.getHand());
+			this.strategy = new HighRiskStrategy();
 			break;
 		}
 	}
