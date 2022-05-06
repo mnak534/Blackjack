@@ -11,7 +11,7 @@ import nz.ac.auckland.se281.a3.Player;
 
 public class Bot extends Player {
 
-	private Strategy strategy;
+	private BotStrategy strategy;
 
 	public Bot(String name) {
 		super(name);

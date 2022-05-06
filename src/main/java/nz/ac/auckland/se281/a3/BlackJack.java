@@ -13,7 +13,7 @@ import nz.ac.auckland.se281.a3.dealer.Dealer;
  */
 public class BlackJack {
 
-	private List<Player> players;
+	private List<Player> players; // Only contains players, not a dealer
 	private Dealer dealer;
 	private Deck deck;
 
@@ -106,6 +106,39 @@ public class BlackJack {
 	 */
 	protected void printAndUpdateResults(int round) {
 
+		// Determines whether each player won/lost
+		for (Player player : players) {
+
+			// Store the hands of a player and the dealer
+			Hand playerHand = player.getHand();
+			Hand dealerHand = dealer.getHand();
+
+			// Initialise the result with 1 which indicates that a player won.
+			int result = 1;
+
+			// All the possible cases that a player loses
+			// When a player is busted
+			if (playerHand.isBust()) {
+				result = 0;
+			}
+			// When a player get a blackjack but the delaer also has a blackjack
+			else if (playerHand.isBlackJack() && dealerHand.isBlackJack()) {
+				result = 0;
+			} else {
+				// When a player's score is lower than the dealer's score and the dealer is not
+				// busted
+				if (playerHand.getScore() <= dealerHand.getScore() && !dealerHand.isBust()) {
+					result = 0;
+				}
+			}
+
+			// Store the result
+			player.addResult(result);
+
+			// Print the result
+			System.out.println("Round " + round + ": " + player.getName() + " " + player.getResult(round)
+					+ playerHand.getBet() + " chips");
+		}
 	}
 
 	/**
