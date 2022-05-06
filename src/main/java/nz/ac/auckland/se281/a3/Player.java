@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public abstract class Player extends Participant {
 
-	private ArrayList<Integer> resultsArray = new ArrayList<>(); // 0 is lost, 1 is win
+	private ArrayList<Integer> resultsList = new ArrayList<>(); // 0 is lost, 1 is win
 
 	public Player(String name) {
 		super(name);
@@ -18,7 +18,7 @@ public abstract class Player extends Participant {
 	public abstract int makeABet();
 
 	public String getResult(int round) {
-		if (resultsArray.get(round) == 0) {
+		if (resultsList.get(round) == 0) {
 			return " lost ";
 		} else {
 			return " won ";
@@ -27,6 +27,21 @@ public abstract class Player extends Participant {
 
 	// Add a result to resultsArray
 	public void addResult(int result) {
-		resultsArray.add(result);
+		resultsList.add(result);
+	}
+
+	public int howManyWon() {
+		int winCount = 0;
+		for (Integer i : resultsList) {
+			if (i == 1) {
+				winCount++;
+			}
+		}
+		return winCount;
+	}
+
+	public int howManyLost() {
+		// the game played should be the size of the resultsList
+		return resultsList.size() - howManyWon();
 	}
 }
