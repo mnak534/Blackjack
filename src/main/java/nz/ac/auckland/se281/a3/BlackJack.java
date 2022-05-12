@@ -5,8 +5,8 @@ import java.util.List;
 
 import nz.ac.auckland.se281.a3.bot.Bot;
 import nz.ac.auckland.se281.a3.dealer.Dealer;
-import nz.ac.auckland.se281.a3.dealer.HighestBidderStrategy;
-import nz.ac.auckland.se281.a3.dealer.TopWinnerStrategy;
+import nz.ac.auckland.se281.a3.dealer.TargetHighestBidder;
+import nz.ac.auckland.se281.a3.dealer.TargetTopWinner;
 
 /**
  * Unless it is specified in the JavaDoc, you cannot change any methods.
@@ -87,8 +87,8 @@ public class BlackJack {
 		String botStrategyString = getBotStrategy(); // UNCOMMENT THIS
 
 		// create and set Bots strategy here
-		bot1.strategyFactory(botStrategyString);
-		bot2.strategyFactory(botStrategyString);
+		bot1.setBotStrategy(botStrategyString);
+		bot2.setBotStrategy(botStrategyString);
 
 		players.add(bot1);
 		players.add(bot2);
@@ -101,7 +101,7 @@ public class BlackJack {
 	protected void initDealer() {
 		// set the initial strategy using the Strategy pattern
 		dealer = new Dealer("Dealer");
-		dealer.setDealerStrategy(new HighestBidderStrategy(this));
+		dealer.setDealerStrategy(new TargetHighestBidder(this));
 	}
 
 	/**
@@ -135,12 +135,12 @@ public class BlackJack {
 			// If there is, change the dealer strategy to the one that targets the top
 			// winner
 			if (player.getNetWins() >= 2) {
-				dealer.setDealerStrategy(new TopWinnerStrategy(this));
+				dealer.setDealerStrategy(new TargetTopWinner(this));
 			}
 			// Otherwise, change the dealer strategy to the one that targets the highest
 			// bidder
 			else {
-				dealer.setDealerStrategy(new HighestBidderStrategy(this));
+				dealer.setDealerStrategy(new TargetHighestBidder(this));
 			}
 		}
 	}

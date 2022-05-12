@@ -40,8 +40,8 @@ public class Bot extends Player {
 	 * @param strategy : string indicates which bot strategy a user wants the bots
 	 *                 to play.
 	 */
-	public void strategyFactory(String strategy) {
-		// factory here
+	public void setBotStrategy(String strategy) {
+		// BotStrategy factory based on the user input
 		switch (strategy) {
 		case "R":
 			this.strategy = new RandomStrategy();
