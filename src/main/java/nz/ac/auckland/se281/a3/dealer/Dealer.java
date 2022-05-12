@@ -19,4 +19,11 @@ public class Dealer extends Participant {
 		return Action.HOLD;
 	}
 
+	/**
+	 * Determines which strategy to play
+	 */
+	public void strategyFactory() {
+		// TO DO
+	}
+
 }

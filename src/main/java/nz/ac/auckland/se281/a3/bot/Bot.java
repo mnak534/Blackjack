@@ -17,16 +17,28 @@ public class Bot extends Player {
 		super(name);
 	}
 
+	/**
+	 * a bot decides the action (HIT or HOLD) for a game
+	 */
 	@Override
 	public Action decideAction(Hand hand) {
 		return strategy.action(hand);
 	}
 
+	/**
+	 * a bot decides the amount of a bet for a game
+	 */
 	@Override
 	public int makeABet() {
 		return strategy.bet();
 	}
 
+	/**
+	 * Create a BotStrategy instance depending on a user's choice.
+	 * 
+	 * @param strategy : string indicates which bot strategy a user wants the bots
+	 *                 to play.
+	 */
 	public void strategyFactory(String strategy) {
 		// factory here
 		switch (strategy) {

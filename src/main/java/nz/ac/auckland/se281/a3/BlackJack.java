@@ -98,11 +98,14 @@ public class BlackJack {
 	protected void initDealer() {
 		// set the initial strategy using the Strategy pattern
 		dealer = new Dealer("Dealer");
+
 	}
 
 	/**
 	 * TODO This method prints and updates the results (wins and losses) you should
 	 * change this method for Task 2 and Task 3
+	 * 
+	 * @param round : a round number of the current round
 	 */
 	protected void printAndUpdateResults(int round) {
 
