@@ -5,6 +5,7 @@ import java.util.List;
 
 import nz.ac.auckland.se281.a3.bot.Bot;
 import nz.ac.auckland.se281.a3.dealer.Dealer;
+import nz.ac.auckland.se281.a3.dealer.HighestBidderStrategy;
 
 /**
  * Unless it is specified in the JavaDoc, you cannot change any methods.
@@ -24,7 +25,7 @@ public class BlackJack {
 	}
 
 	/**
-	 * Thi constructor is for testing reasons
+	 * This constructor is for testing reasons
 	 * 
 	 * @param cards
 	 */
@@ -83,6 +84,7 @@ public class BlackJack {
 		Bot bot2 = new Bot("Bot2");
 
 		String botStrategyString = getBotStrategy(); // UNCOMMENT THIS
+
 		// create and set Bots strategy here
 		bot1.strategyFactory(botStrategyString);
 		bot2.strategyFactory(botStrategyString);
@@ -98,7 +100,7 @@ public class BlackJack {
 	protected void initDealer() {
 		// set the initial strategy using the Strategy pattern
 		dealer = new Dealer("Dealer");
-
+		dealer.setDealerStrategy(new HighestBidderStrategy(this));
 	}
 
 	/**

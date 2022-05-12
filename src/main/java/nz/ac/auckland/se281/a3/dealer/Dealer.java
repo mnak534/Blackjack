@@ -10,20 +10,24 @@ import nz.ac.auckland.se281.a3.Participant;
  */
 public class Dealer extends Participant {
 
+	private DealerStrategy strategy;
+
 	public Dealer(String name) {
 		super(name);
 	}
 
 	@Override
 	public Action decideAction(Hand hand) {
-		return Action.HOLD;
+		return strategy.action(hand);
 	}
 
 	/**
-	 * Determines which strategy to play
+	 * Set a specified strategy that a dealer plays.
+	 * 
+	 * @param strategy : a DealerStrategy instance
 	 */
-	public void strategyFactory() {
-		// TO DO
+	public void setDealerStrategy(DealerStrategy strategy) {
+		this.strategy = strategy;
 	}
 
 }

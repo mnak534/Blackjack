@@ -34,7 +34,8 @@ public class Bot extends Player {
 	}
 
 	/**
-	 * Create a BotStrategy instance depending on a user's choice.
+	 * Create a BotStrategy instance depending on a user's choice. Set the bot's
+	 * strategy to the specified strategy
 	 * 
 	 * @param strategy : string indicates which bot strategy a user wants the bots
 	 *                 to play.

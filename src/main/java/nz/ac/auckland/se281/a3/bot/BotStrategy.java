@@ -16,7 +16,7 @@ public interface BotStrategy {
 	/**
 	 * Decides a bet amount
 	 * 
-	 * @return the amount of a bet for a gameS
+	 * @return the amount of a bet for a game
 	 */
 	int bet();
 }
