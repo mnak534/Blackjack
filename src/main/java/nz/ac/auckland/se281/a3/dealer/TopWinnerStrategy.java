@@ -1,27 +1,27 @@
 package nz.ac.auckland.se281.a3.dealer;
 
 import nz.ac.auckland.se281.a3.BlackJack;
-import nz.ac.auckland.se281.a3.Hand;
-import nz.ac.auckland.se281.a3.Participant.Action;
 
 public class TopWinnerStrategy extends DealerStrategy {
 
+	private BlackJack game;
+
 	/**
-	 * Constructor for TopWinnerStrategy
+	 * Constructor for TopWinnerStrategy.
+	 * 
+	 * @param game : an instance of BlackJack
 	 */
 	public TopWinnerStrategy(BlackJack game) {
-		// Determine which player has the highest net win
-		super(game);
+		this.game = game;
 	}
 
+	/**
+	 * Determine who has the highest net wins at the moment
+	 */
 	@Override
-	public Action action(Hand hand) {
-		return null;
-	}
-
-	@Override
-	void decideTarget() {
+	public void decideTarget() {
 		// TODO Auto-generated method stub
 
 	}
+
 }

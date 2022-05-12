@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public abstract class Player extends Participant {
 
-	private ArrayList<Integer> resultsList = new ArrayList<>(); // 0 is lost, 1 is win
+	private ArrayList<Integer> resultsList = new ArrayList<>(); // 0 means a player lost, abd 1 means a player won
 
 	public Player(String name) {
 		super(name);
@@ -41,28 +41,4 @@ public abstract class Player extends Participant {
 		resultsList.add(result);
 	}
 
-	/**
-	 * Count how many times this player won so far.
-	 * 
-	 * @return number of times this player has won
-	 */
-	public int howManyWon() {
-		int winCount = 0;
-		for (Integer i : resultsList) {
-			if (i == 1) {
-				winCount++;
-			}
-		}
-		return winCount;
-	}
-
-	/**
-	 * Count how many times this player lost so far.
-	 * 
-	 * @return number of times this player has lost.
-	 */
-	public int howManyLost() {
-		// the number of games played should be the size of the resultsList
-		return resultsList.size() - howManyWon();
-	}
 }

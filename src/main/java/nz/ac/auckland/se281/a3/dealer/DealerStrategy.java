@@ -1,38 +1,38 @@
 package nz.ac.auckland.se281.a3.dealer;
 
-import nz.ac.auckland.se281.a3.BlackJack;
 import nz.ac.auckland.se281.a3.Hand;
 import nz.ac.auckland.se281.a3.Participant.Action;
 import nz.ac.auckland.se281.a3.Player;
 
 public abstract class DealerStrategy {
 
-	// Instance fields
 	protected Player target;
-	protected BlackJack game;
 
 	/**
-	 * Constructor for DealerStrategy
+	 * Determines an action of a dealer for a game based on its target's score.
 	 * 
+	 * @param dealerHand : a Hand instance of a dealer
+	 * @return : an action of dealer for a game
 	 */
-	public DealerStrategy(BlackJack game) {
-		this.game = game;
+	public Action action(Hand dealerHand) {
+		Hand targetHand = target.getHand();
+		if (targetHand.isBust()) {
+			return Action.HOLD;
+		} else if (targetHand.isBlackJack() && !dealerHand.isBlackJack()) {
+			if (dealerHand.getScore() >= 17) {
+				return Action.HOLD;
+			} else {
+				return Action.HIT;
+			}
+		} else if (targetHand.getScore() > dealerHand.getScore() && !dealerHand.isBust()) {
+			return Action.HIT;
+		}
+		return Action.HOLD;
 	}
 
 	/**
-	 * Decides whether hit or hold
-	 * 
-	 * @param hand : a Hand instance
-	 * @return an action for a game (HIT or HOLD)
+	 * Determines the target that a dealer is to defeat
 	 */
-	public Action action(Hand hand) {
-
-		return null;
-	}
-
-	/**
-	 * Decides a player that a dealer is to defeat
-	 */
-	abstract void decideTarget();
+	public abstract void decideTarget();
 
 }

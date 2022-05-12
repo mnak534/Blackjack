@@ -111,38 +111,47 @@ public class BlackJack {
 	 */
 	protected void printAndUpdateResults(int round) {
 
-		// Determines whether each player won/lost
+		getResult();
+
+		// Loop to print the result for each player
+		for (Player player : players) {
+			// Print the result
+			System.out.println("Round " + round + ": " + player.getName() + " " + player.getResult(round)
+					+ player.getHand().getBet() + " chips");
+		}
+
+	}
+
+	/**
+	 * Determines whether each player wins or loses in the round, and store the
+	 * results
+	 */
+	protected void getResult() {
+
+		// Stores the hand of the dealer
+		Hand dealerHand = dealer.getHand();
+
+		// Determines whether each player won or lost
 		for (Player player : players) {
 
-			// Store the hands of a player and the dealer
+			// Stores the hand of a player
 			Hand playerHand = player.getHand();
-			Hand dealerHand = dealer.getHand();
 
-			// Initialise the result with 1 which indicates that a player won.
+			// Declare the result of a player in the round
+			// 0 = player lost, 1 = player won
 			int result = 1;
 
 			// All the possible cases that a player loses
-			// When a player is busted
 			if (playerHand.isBust()) {
 				result = 0;
-			}
-			// When a player get a blackjack but the delaer also has a blackjack
-			else if (playerHand.isBlackJack() && dealerHand.isBlackJack()) {
+			} else if (playerHand.isBlackJack() && dealerHand.isBlackJack()) {
 				result = 0;
-			} else {
-				// When a player's score is lower than the dealer's score and the dealer is not
-				// busted
-				if (playerHand.getScore() <= dealerHand.getScore() && !dealerHand.isBust()) {
-					result = 0;
-				}
+			} else if (playerHand.getScore() <= dealerHand.getScore() && !dealerHand.isBust()) {
+				result = 0;
 			}
 
 			// Store the result
 			player.addResult(result);
-
-			// Print the result
-			System.out.println("Round " + round + ": " + player.getName() + " " + player.getResult(round)
-					+ playerHand.getBet() + " chips");
 		}
 	}
 
