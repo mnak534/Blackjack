@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public abstract class Player extends Participant {
 
 	private ArrayList<Integer> resultsList = new ArrayList<>(); // 0 means a player lost, abd 1 means a player won
+	private int netwins;
 
 	public Player(String name) {
 		super(name);
@@ -39,6 +40,14 @@ public abstract class Player extends Participant {
 	 */
 	public void addResult(int result) {
 		resultsList.add(result);
+	}
+
+	public int getNetWins() {
+		netwins = 0;
+		for (int i = 0; i < resultsList.size(); i++) {
+			netwins += resultsList.get(i);
+		}
+		return netwins;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import nz.ac.auckland.se281.a3.bot.Bot;
 import nz.ac.auckland.se281.a3.dealer.Dealer;
 import nz.ac.auckland.se281.a3.dealer.HighestBidderStrategy;
+import nz.ac.auckland.se281.a3.dealer.TopWinnerStrategy;
 
 /**
  * Unless it is specified in the JavaDoc, you cannot change any methods.
@@ -111,7 +112,10 @@ public class BlackJack {
 	 */
 	protected void printAndUpdateResults(int round) {
 
+		// Determines each player's result for a round and update the results
 		getResult();
+		// Determines if the strategy of the dealer should be changed or not
+		strategyChange();
 
 		// Loop to print the result for each player
 		for (Player player : players) {
@@ -119,7 +123,26 @@ public class BlackJack {
 			System.out.println("Round " + round + ": " + player.getName() + " " + player.getResult(round)
 					+ player.getHand().getBet() + " chips");
 		}
+	}
 
+	/**
+	 * Update the netwins and decide if the dealer strategy should be changed or not
+	 */
+	private void strategyChange() {
+		// Loop through each player to see if there is at least one pleayer with netwins
+		// >=2
+		for (Player player : players) {
+			// If there is, change the dealer strategy to the one that targets the top
+			// winner
+			if (player.getNetWins() >= 2) {
+				dealer.setDealerStrategy(new TopWinnerStrategy(this));
+			}
+			// Otherwise, change the dealer strategy to the one that targets the highest
+			// bidder
+			else {
+				dealer.setDealerStrategy(new HighestBidderStrategy(this));
+			}
+		}
 	}
 
 	/**
@@ -161,8 +184,8 @@ public class BlackJack {
 	protected void printGameStatistics() {
 		for (Player player : players) {
 			// Print the static
-			System.out.println(player.getName() + " won " + player.howManyWon() + " times and lost "
-					+ player.howManyLost() + " times");
+//			System.out.println(player.getName() + " won " + player.howManyWon() + " times and lost "
+//					+ player.howManyLost() + " times");
 		}
 	}
 

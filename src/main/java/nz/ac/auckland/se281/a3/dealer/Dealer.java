@@ -30,4 +30,13 @@ public class Dealer extends Participant {
 		this.strategy = strategy;
 	}
 
+	/**
+	 * Getter method for the dealer's strategy
+	 * 
+	 * @return an instance of DealerStrategy that the dealer is currently playing
+	 */
+	public DealerStrategy getDealerStrategy() {
+		return this.strategy;
+	}
+
 }
