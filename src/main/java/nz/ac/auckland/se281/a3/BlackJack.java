@@ -101,7 +101,7 @@ public class BlackJack {
 	protected void initDealer() {
 		// set the initial strategy using the Strategy pattern
 		dealer = new Dealer("Dealer");
-		dealer.setDealerStrategy(new TargetHighestBidder(this));
+		dealer.setDealerStrategy(new TargetHighestBidder(this.players));
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class BlackJack {
 		// Loop to print the result for each player
 		for (Player player : players) {
 			// Print the result
-			System.out.println("Round " + round + ": " + player.getName() + " " + player.getResult(round)
+			System.out.println("Round " + round + ": " + player.getName() + " " + player.getCurrentResult() + " "
 					+ player.getHand().getBet() + " chips");
 		}
 	}
@@ -129,19 +129,25 @@ public class BlackJack {
 	 * Update the netwins and decide if the dealer strategy should be changed or not
 	 */
 	private void strategyChange() {
+
+		boolean netWinsMoreThanTwo = false;
+
 		// Loop through each player to see if there is at least one pleayer with netwins
 		// >=2
 		for (Player player : players) {
 			// If there is, change the dealer strategy to the one that targets the top
 			// winner
 			if (player.getNetWins() >= 2) {
-				dealer.setDealerStrategy(new TargetTopWinner(this));
+				netWinsMoreThanTwo = true;
 			}
-			// Otherwise, change the dealer strategy to the one that targets the highest
-			// bidder
-			else {
-				dealer.setDealerStrategy(new TargetHighestBidder(this));
-			}
+		}
+
+		if (netWinsMoreThanTwo) {
+			dealer.setDealerStrategy(new TargetTopWinner(this.players));
+//			System.out.println("The delaer strategy is changed to the TargetTopWinner");
+		} else {
+			dealer.setDealerStrategy(new TargetHighestBidder(this.players));
+//			System.out.println("The delaer strategy is changed to the TargetHighestBidder");
 		}
 	}
 
@@ -161,20 +167,24 @@ public class BlackJack {
 			Hand playerHand = player.getHand();
 
 			// Declare the result of a player in the round
-			// 0 = player lost, 1 = player won
-			int result = 1;
+			boolean playerWon = true;
 
 			// All the possible cases that a player loses
 			if (playerHand.isBust()) {
-				result = 0;
+				playerWon = false;
 			} else if (playerHand.isBlackJack() && dealerHand.isBlackJack()) {
-				result = 0;
+				playerWon = false;
 			} else if (playerHand.getScore() <= dealerHand.getScore() && !dealerHand.isBust()) {
-				result = 0;
+				playerWon = false;
 			}
 
 			// Store the result
-			player.addResult(result);
+			if (playerWon) {
+				player.incrementNetWins();
+			} else {
+				player.decrementNetWins();
+			}
+			player.updateResult(playerWon);
 		}
 	}
 

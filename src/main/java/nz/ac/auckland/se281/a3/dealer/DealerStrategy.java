@@ -15,6 +15,8 @@ public abstract class DealerStrategy {
 	 * @return : an action of dealer for a game
 	 */
 	public Action action(Hand dealerHand) {
+		decideTarget();
+		System.out.println("The dealer's target: " + this.target.getName());
 		Hand targetHand = target.getHand();
 		if (targetHand.isBust()) {
 			return Action.HOLD;
