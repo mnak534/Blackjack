@@ -8,8 +8,8 @@ package nz.ac.auckland.se281.a3;
 public abstract class Player extends Participant {
 
 	private int netwins;
-	private int howManyWon;
-	private int howManyLost;
+	private int howManyWon = 0;
+	private int howManyLost = 0;
 	private String currentResult;
 
 	public Player(String name) {
@@ -32,18 +32,19 @@ public abstract class Player extends Participant {
 	}
 
 	// TO DO
-	public void incrementNetWins() {
-		this.netwins++;
+	public void incrementHowManyWon() {
+		this.howManyWon++;
 	}
 
 	// TO DO
-	public void decrementNetWins() {
-		this.netwins--;
+	public void incrementHowManyLost() {
+		this.howManyLost++;
 	}
 
 	// TO DO
 	public int getNetWins() {
-		return netwins;
+		this.netwins = this.howManyWon - this.howManyLost;
+		return this.netwins;
 	}
 
 	// TO DO

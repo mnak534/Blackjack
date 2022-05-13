@@ -180,9 +180,9 @@ public class BlackJack {
 
 			// Store the result
 			if (playerWon) {
-				player.incrementNetWins();
+				player.incrementHowManyWon();
 			} else {
-				player.decrementNetWins();
+				player.incrementHowManyLost();
 			}
 			player.updateResult(playerWon);
 		}
@@ -194,8 +194,8 @@ public class BlackJack {
 	protected void printGameStatistics() {
 		for (Player player : players) {
 			// Print the static
-//			System.out.println(player.getName() + " won " + player.howManyWon() + " times and lost "
-//					+ player.howManyLost() + " times");
+			System.out.println(player.getName() + " won " + player.getHowManyWon() + " times and lost "
+					+ player.getHowManyLost() + " times");
 		}
 	}
 
