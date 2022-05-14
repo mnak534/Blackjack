@@ -170,12 +170,29 @@ public class BlackJack {
 			boolean playerWon = true;
 
 			// All the possible cases that a player loses
+
+			// 1. If a player is busted, the player loses
 			if (playerHand.isBust()) {
 				playerWon = false;
-			} else if (playerHand.isBlackJack() && dealerHand.isBlackJack()) {
+			}
+
+			// 2. If a player and the dealer both have blackjack, the player loses
+			else if (playerHand.isBlackJack() && dealerHand.isBlackJack()) {
 				playerWon = false;
-			} else if (playerHand.getScore() <= dealerHand.getScore() && !dealerHand.isBust()) {
-				playerWon = false;
+			}
+
+			// 3. If a player's score is <=21 and not blackjack
+			else if (playerHand.getScore() <= 21 && !playerHand.isBlackJack()) {
+				// 3(i). if the dealer is blackjack, then the player loses
+				if (dealerHand.isBlackJack()) {
+					playerWon = false;
+				}
+				// 3(ii). if the dealer's score is <=21 and not blackjack
+				// AND if a player's score is <= dealer's score, the player loses
+				if (dealerHand.getScore() <= 21 && !dealerHand.isBlackJack()
+						&& playerHand.getScore() <= dealerHand.getScore()) {
+					playerWon = false;
+				}
 			}
 
 			// Store the result
