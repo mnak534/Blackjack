@@ -33,26 +33,8 @@ public class Bot extends Player {
 		return strategy.bet();
 	}
 
-	/**
-	 * Create a BotStrategy instance depending on a user's choice. Set the bot's
-	 * strategy to the specified strategy
-	 * 
-	 * @param strategy : string indicates which bot strategy a user wants the bots
-	 *                 to play.
-	 */
-	public void setBotStrategy(String strategy) {
-		// BotStrategy factory based on the user input
-		switch (strategy) {
-		case "R":
-			this.strategy = new RandomStrategy();
-			break;
-		case "LR":
-			this.strategy = new LowRiskStrategy();
-			break;
-		case "HR":
-			this.strategy = new HighRiskStrategy();
-			break;
-		}
+	public void setBotStrategy(BotStrategy strategy) {
+		this.strategy = strategy;
 	}
 
 }
