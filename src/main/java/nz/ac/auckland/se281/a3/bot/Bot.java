@@ -40,7 +40,7 @@ public class Bot extends Player {
 	 * Set the passed strategy as the strategy of this bot to play for the entire
 	 * game
 	 * 
-	 * @param an instance of BotStrategy
+	 * @param strategy : an instance of BotStrategy
 	 */
 	public void setBotStrategy(BotStrategy strategy) {
 		this.strategy = strategy;

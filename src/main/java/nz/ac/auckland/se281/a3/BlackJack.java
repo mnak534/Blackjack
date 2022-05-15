@@ -136,7 +136,7 @@ public class BlackJack {
 		// Determines each player's result for the round and update the results
 		getResult();
 		// Determines if the dealer's strategy should be changed or not
-		strategyChange();
+		changeStrategy();
 
 		// Loop to print the result for each player
 		for (Player player : players) {
@@ -151,7 +151,7 @@ public class BlackJack {
 	 * change the strategy or not by counting the net-wins of each player.
 	 * 
 	 */
-	private void strategyChange() {
+	private void changeStrategy() {
 
 		// a variable indicating if there is at least one player with netwins>=2
 		boolean netWinsMoreThanTwo = false;

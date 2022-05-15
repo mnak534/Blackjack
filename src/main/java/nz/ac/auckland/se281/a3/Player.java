@@ -35,7 +35,8 @@ public abstract class Player extends Participant {
 	}
 
 	/**
-	 * Getter method for currentResult
+	 * Getter method for currentResult that represents the Player's result in the
+	 * most recent round.
 	 * 
 	 * @return this Player's result in the most recent round.
 	 */
