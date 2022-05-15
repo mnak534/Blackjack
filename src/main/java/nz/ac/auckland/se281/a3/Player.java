@@ -69,7 +69,8 @@ public abstract class Player extends Participant {
 	}
 
 	/**
-	 * Getter method for howManyWon field
+	 * Getter method for howManyWon field which tells how many rounds this player
+	 * has won so far.
 	 * 
 	 * @return the total number of rounds this user has won
 	 */
@@ -78,7 +79,8 @@ public abstract class Player extends Participant {
 	}
 
 	/**
-	 * Getter method for howManyLost field
+	 * Getter method for howManyLost field which tells how many rounds this player
+	 * has lost so far.
 	 * 
 	 * @return the total number of rounds this user has lost
 	 */

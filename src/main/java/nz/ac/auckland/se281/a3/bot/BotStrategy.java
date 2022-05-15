@@ -14,7 +14,7 @@ public interface BotStrategy {
 	Action action(Hand hand);
 
 	/**
-	 * Decides a bet amound a bot bets for the round
+	 * Decides a bet amount a bot bets for the round
 	 * 
 	 * @return the amount of a bet for a round
 	 */
