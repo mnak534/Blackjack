@@ -7,12 +7,18 @@ import nz.ac.auckland.se281.a3.Participant.Action;
 
 public class RandomStrategy implements BotStrategy {
 
+	/**
+	 * Method that implements the random stragy in which a Bot chooses HIT or HOLD
+	 * randomly.
+	 * 
+	 * @param hand : an Hand instance
+	 * @return Action that a Bot plays for the round
+	 */
 	@Override
 	public Action action(Hand hand) {
 
 		// Create a Random instance
 		Random rand = new Random();
-
 		// Obtain a random integer between 0-1 (inclusive)
 		int n = rand.nextInt(2);
 
@@ -26,11 +32,16 @@ public class RandomStrategy implements BotStrategy {
 
 	}
 
+	/**
+	 * Method that implements the random stragy in which a Bot bets randomly from 1
+	 * to 100 (inclusive).
+	 * 
+	 * @return the amount of bet of the Bot for the round
+	 */
 	@Override
 	public int bet() {
 		// Create a Random instance
 		Random rand = new Random();
-
 		// Obtain a random integer between 0-99 (inclusive)
 		int n = rand.nextInt(100);
 

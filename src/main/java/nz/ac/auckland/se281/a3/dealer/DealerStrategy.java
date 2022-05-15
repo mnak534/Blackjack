@@ -6,20 +6,26 @@ import nz.ac.auckland.se281.a3.Player;
 
 public abstract class DealerStrategy {
 
-	protected Player target;
+	protected Player target; // Dealer targets one Player and tries to defeat that Player
 
 	/**
-	 * Determines an action of a dealer for a game based on its target's score.
+	 * Determines an Action of a Dealer for the round based on its target's current
+	 * score.
 	 * 
-	 * @param dealerHand : a Hand instance of a dealer
-	 * @return : an action of dealer for a game
+	 * @param dealerHand : a Hand instance of the Dealer
+	 * @return : an Action of the Dealer for the round
 	 */
 	public Action action(Hand dealerHand) {
+
+		// Choose the target (the way of choosing is different to each DealerStrategy)
 		decideTarget();
-		System.out.println("The dealer's target: " + this.target.getName());
+
+		// a Hand instance of the target
 		Hand targetHand = target.getHand();
 
-		// Dealer's action to defeat the target
+		// Dealer's action to defeat the target (Keep in mind that the game won't ask
+		// the dealer to make a decision if the dealer's score is >= 21(including
+		// blackjack)
 
 		// If the target is busted, the dealer wins anyway, so HOLD
 		if (targetHand.isBust()) {
@@ -54,7 +60,8 @@ public abstract class DealerStrategy {
 	}
 
 	/**
-	 * Determines the target that a dealer is to defeat
+	 * Determines which Player the Dealer tries to defeat for a round, and set the
+	 * Player to the target field.
 	 */
 	public abstract void decideTarget();
 

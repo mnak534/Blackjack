@@ -16,13 +16,20 @@ public class Dealer extends Participant {
 		super(name);
 	}
 
+	/**
+	 * a Dealer decides the action (HIT or HOLD) for the round
+	 * 
+	 * @param a Hand instance that belongs to this Dealer
+	 * @return Action(HIT/HOLD) that the Dealer plays for the round
+	 */
 	@Override
 	public Action decideAction(Hand hand) {
 		return strategy.action(hand);
 	}
 
 	/**
-	 * Set a specified strategy that a dealer plays.
+	 * Set the passed DealerStrategy instance as the strategy that this Dealer plays
+	 * until the strategy is updated again.
 	 * 
 	 * @param strategy : a DealerStrategy instance
 	 */

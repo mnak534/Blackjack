@@ -7,18 +7,31 @@ import nz.ac.auckland.se281.a3.Participant.Action;
 
 public class LowRiskStrategy implements BotStrategy {
 
+	/**
+	 * Method that implements the low risk stragy in which a Bot HOLD if the current
+	 * hand has a score >=17, HIT otherwise.
+	 * 
+	 * @param hand : an Hand instance
+	 * @return Action that a Bot plays for the round
+	 */
 	@Override
 	public Action action(Hand hand) {
 		// if the score is higher or equal to 17, it holds
 		if (hand.getScore() >= 17) {
 			return Action.HOLD;
 		}
-		// else, it hits
+		// otherwise, it hits
 		else {
 			return Action.HIT;
 		}
 	}
 
+	/**
+	 * Method that implements the low risk stragy in which a Bot bets randomly from
+	 * 10 to 50 (inclusive).
+	 * 
+	 * @return the amount of bet of the Bot for the round
+	 */
 	@Override
 	public int bet() {
 		// Create a Random instance

@@ -81,6 +81,10 @@ public class BlackJack {
 	/**
 	 * TODO This method initializes the Bots, you should change this method for
 	 * Task1
+	 * 
+	 * Create two Bot instances and one instance of BotStrategy depending on the
+	 * user's choice, and set the strategy instance as these two Bots' strategies.
+	 * Add the bots to the playerers list.
 	 */
 	protected void initBots() {
 		Bot bot1 = new Bot("Bot1");
@@ -88,10 +92,10 @@ public class BlackJack {
 
 		String botStrategyString = getBotStrategy(); // UNCOMMENT THIS
 
-		// Create a BotStrategy class specified by a user
-		BotStrategy botStrategy = BotStrategyFactory.setSBotStrategy(botStrategyString);
+		// Create an instance of BotStrategy class depending on the user's choice
+		BotStrategy botStrategy = BotStrategyFactory.createBotStrategy(botStrategyString);
 
-		// Set the strategy to each bot
+		// Set the strategy instance as the bots' strategy
 		bot1.setBotStrategy(botStrategy);
 		bot2.setBotStrategy(botStrategy);
 
@@ -102,10 +106,15 @@ public class BlackJack {
 	/**
 	 * TODO This method initializes the Dealer, you should change this method for
 	 * Task2
+	 * 
+	 * Initialise the Dealer by creating a new Dealer instance and set the strategy
+	 * that targets the highest bidder as the initial strategy.
 	 */
 	protected void initDealer() {
 		// set the initial strategy using the Strategy pattern
 		dealer = new Dealer("Dealer");
+
+		// Initially, Dealer uses the Targeting the Highest Bidder strategy
 		dealer.setDealerStrategy(new TargetHighestBidder(this.players));
 	}
 
@@ -113,13 +122,20 @@ public class BlackJack {
 	 * TODO This method prints and updates the results (wins and losses) you should
 	 * change this method for Task 2 and Task 3
 	 * 
+	 * This method is called after every round.
+	 * 
+	 * Determines the results of each player, and update the results, and checks if
+	 * the Dealer needs to change the strategy. Then, print the result for each
+	 * player.
+	 * 
 	 * @param round : a round number of the current round
+	 * 
 	 */
 	protected void printAndUpdateResults(int round) {
 
-		// Determines each player's result for a round and update the results
+		// Determines each player's result for the round and update the results
 		getResult();
-		// Determines if the strategy of the dealer should be changed or not
+		// Determines if the dealer's strategy should be changed or not
 		strategyChange();
 
 		// Loop to print the result for each player
@@ -131,63 +147,65 @@ public class BlackJack {
 	}
 
 	/**
-	 * Update the netwins and decide if the dealer strategy should be changed or not
+	 * This methods sets the Dealer's strategy after determining the Dealer should
+	 * change the strategy or not by counting the net-wins of each player.
+	 * 
 	 */
 	private void strategyChange() {
 
+		// a variable indicating if there is at least one player with netwins>=2
 		boolean netWinsMoreThanTwo = false;
 
-		// Loop through each player to see if there is at least one pleayer with netwins
-		// >=2
+		// Loop through each player to see if there is at least one pleayer with
+		// netwins >=2
 		for (Player player : players) {
-			// If there is, change the dealer strategy to the one that targets the top
-			// winner
 			if (player.getNetWins() >= 2) {
 				netWinsMoreThanTwo = true;
 			}
 		}
 
+		// If there is, the dealer should play the strategy that targets the top winner
 		if (netWinsMoreThanTwo) {
 			dealer.setDealerStrategy(new TargetTopWinner(this.players));
-//			System.out.println("The delaer strategy is changed to the TargetTopWinner");
-		} else {
+		}
+		// Otherwise, the dealer plays the strategy that targets the highest bidder
+		else {
 			dealer.setDealerStrategy(new TargetHighestBidder(this.players));
-//			System.out.println("The delaer strategy is changed to the TargetHighestBidder");
 		}
 	}
 
 	/**
-	 * Determines whether each player wins or loses in the round, and store the
+	 * Determines whether each player won or lost in the round, and store the
 	 * results
 	 */
 	protected void getResult() {
 
-		// Stores the hand of the dealer
+		// the hand of the dealer
 		Hand dealerHand = dealer.getHand();
 
-		// Determines whether each player won or lost
+		// loop to determine whether each player won or lost
 		for (Player player : players) {
 
-			// Stores the hand of a player
+			// the hand of a player
 			Hand playerHand = player.getHand();
 
-			// Declare the result of a player in the round
+			// a variable indicating if the player won in the round
 			boolean playerWon = true;
 
-			// All the possible cases that a player loses
+			// List all the possible cases that a player loses
 
-			// 1. If a player is busted, the player loses
+			// 1. If a player is busted, the player loses regardless
 			if (playerHand.isBust()) {
 				playerWon = false;
 			}
 
 			// 2. If a player and the dealer both have blackjack, the player loses
-			else if (playerHand.isBlackJack() && dealerHand.isBlackJack()) {
+			if (playerHand.isBlackJack() && dealerHand.isBlackJack()) {
 				playerWon = false;
 			}
 
 			// 3. If a player's score is <=21 and not blackjack
-			else if (playerHand.getScore() <= 21 && !playerHand.isBlackJack()) {
+			if (playerHand.getScore() <= 21 && !playerHand.isBlackJack()) {
 				// 3(i). if the dealer is blackjack, then the player loses
 				if (dealerHand.isBlackJack()) {
 					playerWon = false;
@@ -202,10 +220,13 @@ public class BlackJack {
 
 			// Store the result
 			if (playerWon) {
+				// If a player won, increment that player's howManyWon field
 				player.incrementHowManyWon();
 			} else {
+				// If a player lost, increment that player's howManyLost field
 				player.incrementHowManyLost();
 			}
+			// Update the result for the round
 			player.updateResult(playerWon);
 		}
 	}

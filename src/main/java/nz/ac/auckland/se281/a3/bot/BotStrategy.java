@@ -6,17 +6,17 @@ import nz.ac.auckland.se281.a3.Participant.Action;
 public interface BotStrategy {
 
 	/**
-	 * Decides whether hit or hold
+	 * Decides an Action of a Bot (HIT or HOLD) for the round
 	 * 
-	 * @param hand : a Hand instance
-	 * @return an action for a game (HIT or HOLD)
+	 * @param hand : a Hand instance of the Bot that this BotStrategy belongs to
+	 * @return an Action for a game (HIT or HOLD)
 	 */
 	Action action(Hand hand);
 
 	/**
-	 * Decides a bet amount
+	 * Decides a bet amound a bot bets for the round
 	 * 
-	 * @return the amount of a bet for a game
+	 * @return the amount of a bet for a round
 	 */
 	int bet();
 }
