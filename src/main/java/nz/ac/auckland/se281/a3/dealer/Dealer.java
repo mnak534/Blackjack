@@ -19,7 +19,7 @@ public class Dealer extends Participant {
 	/**
 	 * a Dealer decides the action (HIT or HOLD) for the round
 	 * 
-	 * @param hand : a Hand instance that belongs to this Dealer
+	 * @param hand : a Hand instance that belongs to the Dealer
 	 * @return Action(HIT/HOLD) that the Dealer plays for the round
 	 */
 	@Override

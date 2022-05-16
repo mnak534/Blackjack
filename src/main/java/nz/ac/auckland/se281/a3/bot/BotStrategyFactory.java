@@ -3,10 +3,10 @@ package nz.ac.auckland.se281.a3.bot;
 public class BotStrategyFactory {
 
 	/**
-	 * Create a BotStrategy instance depending on a user's choice. Set the bot's
-	 * strategy to the specified strategy
+	 * Create a BotStrategy instance depending on a user's choice, and return the
+	 * BotStrategy instance.
 	 * 
-	 * @param strategy : string that indicates which bot strategy a user wants the
+	 * @param strategy : a string that indicates which bot strategy a user wants
 	 *                 bots to play.
 	 * @return an instance of BotStrategy of the user's choice
 	 */

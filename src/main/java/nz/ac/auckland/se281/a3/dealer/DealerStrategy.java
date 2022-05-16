@@ -13,11 +13,12 @@ public abstract class DealerStrategy {
 	 * score.
 	 * 
 	 * @param dealerHand : a Hand instance of the Dealer
-	 * @return : an Action of the Dealer for the round
+	 * @return an Action of the Dealer for the round
 	 */
 	public Action action(Hand dealerHand) {
 
 		// Choose the target (the way of choosing is different to each DealerStrategy)
+		// Re-choose the target before every time the Dealer actions
 		decideTarget();
 
 		// a Hand instance of the target

@@ -18,7 +18,7 @@ public class Bot extends Player {
 	/**
 	 * a bot decides the action (HIT or HOLD) for a round
 	 * 
-	 * @param hand a Hand instance that belongs to this Bot
+	 * @param hand : a Hand instance that belongs to the Bot
 	 * @return Action(HIT/HOLD) that the Bot plays for the round
 	 */
 	@Override
@@ -37,8 +37,7 @@ public class Bot extends Player {
 	}
 
 	/**
-	 * Set the passed strategy as the strategy of this bot to play for the entire
-	 * game
+	 * Set the passed strategy of the bot to play for the entire game
 	 * 
 	 * @param strategy : an instance of BotStrategy
 	 */

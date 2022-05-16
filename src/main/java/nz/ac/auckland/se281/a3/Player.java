@@ -23,11 +23,11 @@ public abstract class Player extends Participant {
 	 * Update currentResult field that indicates the player's result for the most
 	 * recent round.
 	 * 
-	 * @param currentResult a boolean variable indicating if this player won in the
-	 *                      most recent round.
+	 * @param playerWon : a boolean variable indicating if this player won in the
+	 *                  most recent round.
 	 */
-	public void updateResult(boolean currentResult) {
-		if (currentResult) {
+	public void updateResult(boolean playerWon) {
+		if (playerWon) {
 			this.currentResult = "won";
 		} else {
 			this.currentResult = "lost";
@@ -38,7 +38,8 @@ public abstract class Player extends Participant {
 	 * Getter method for currentResult that represents the Player's result in the
 	 * most recent round.
 	 * 
-	 * @return this Player's result in the most recent round.
+	 * @return a string that indicates this Player's result in the most recent
+	 *         round.
 	 */
 	public String getCurrentResult() {
 		return this.currentResult;
@@ -62,7 +63,7 @@ public abstract class Player extends Participant {
 	 * Calculate the netwins by #rounds won - #rounds lost, and update the value of
 	 * netwins field.
 	 * 
-	 * @return the netwins of this player
+	 * @return the netwins of the Player
 	 */
 	public int getNetWins() {
 		this.netwins = this.howManyWon - this.howManyLost;

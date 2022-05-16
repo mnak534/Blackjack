@@ -16,11 +16,11 @@ public class HighRiskStrategy implements BotStrategy {
 	 */
 	@Override
 	public Action action(Hand hand) {
-		// if the score is >= 19, it HOLD
+		// if the score is >= 19, it HOLDs
 		if (hand.getScore() >= 19) {
 			return Action.HOLD;
 		}
-		// otherwise, it HIT
+		// otherwise, it HITs
 		else {
 			return Action.HIT;
 		}

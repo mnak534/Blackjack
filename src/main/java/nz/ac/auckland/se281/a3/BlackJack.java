@@ -82,23 +82,26 @@ public class BlackJack {
 	 * TODO This method initializes the Bots, you should change this method for
 	 * Task1
 	 * 
-	 * Create two Bot instances and one instance of BotStrategy depending on the
-	 * user's choice, and set the strategy instance as these two Bots' strategies.
-	 * Add the bots to the playerers list.
+	 * Create two Bot instances and instantiate BotStrategy depending on the user's
+	 * choice, and set the strategy as these two Bots' strategies. Add the bots to
+	 * the playerers list.
 	 */
 	protected void initBots() {
+		// Create two Bot instances
 		Bot bot1 = new Bot("Bot1");
 		Bot bot2 = new Bot("Bot2");
 
+		// Get which strategy a user wants bots to play
 		String botStrategyString = getBotStrategy(); // UNCOMMENT THIS
 
-		// Create an instance of BotStrategy class depending on the user's choice
+		// Create an instance of BotStrategy class of the user's choice
 		BotStrategy botStrategy = BotStrategyFactory.createBotStrategy(botStrategyString);
 
-		// Set the strategy instance as the bots' strategy
+		// Set the strategy instance as both of the bots' strategy
 		bot1.setBotStrategy(botStrategy);
 		bot2.setBotStrategy(botStrategy);
 
+		// Add bo1 and bot2 in the players list
 		players.add(bot1);
 		players.add(bot2);
 	}
@@ -112,6 +115,8 @@ public class BlackJack {
 	 */
 	protected void initDealer() {
 		// set the initial strategy using the Strategy pattern
+
+		// Instantiate Dealer
 		dealer = new Dealer("Dealer");
 
 		// Initially, Dealer uses the Targeting the Highest Bidder strategy
@@ -135,7 +140,9 @@ public class BlackJack {
 
 		// Determines each player's result for the round and update the results
 		getResult();
-		// Determines if the dealer's strategy should be changed or not
+
+		// After updated the result, determine if the dealer's strategy should be
+		// changed or not
 		changeStrategy();
 
 		// Loop to print the result for each player
@@ -153,7 +160,7 @@ public class BlackJack {
 	 */
 	private void changeStrategy() {
 
-		// a variable indicating if there is at least one player with netwins>=2
+		// netWinsMoreThanTwo indicates if there is at least one player with netwins>=2
 		boolean netWinsMoreThanTwo = false;
 
 		// Loop through each player to see if there is at least one pleayer with
@@ -180,16 +187,17 @@ public class BlackJack {
 	 */
 	protected void getResult() {
 
-		// the hand of the dealer
+		// the Hand of the Dealer
 		Hand dealerHand = dealer.getHand();
 
 		// loop to determine whether each player won or lost
 		for (Player player : players) {
 
-			// the hand of a player
+			// the Hand of a Player
 			Hand playerHand = player.getHand();
 
-			// a variable indicating if the player won in the round
+			// a variable indicates if the player won in the round,
+			// initialise it to true (= the player won)
 			boolean playerWon = true;
 
 			// List all the possible cases that a player loses
@@ -206,7 +214,7 @@ public class BlackJack {
 
 			// 3. If a player's score is <=21 and not blackjack
 			if (playerHand.getScore() <= 21 && !playerHand.isBlackJack()) {
-				// 3(i). if the dealer is blackjack, then the player loses
+				// 3(i). if the dealer has blackjack, then the player loses
 				if (dealerHand.isBlackJack()) {
 					playerWon = false;
 				}
@@ -220,13 +228,13 @@ public class BlackJack {
 
 			// Store the result
 			if (playerWon) {
-				// If a player won, increment that player's howManyWon field
+				// If a player won, increment the number of rounds the player won so far.
 				player.incrementHowManyWon();
 			} else {
-				// If a player lost, increment that player's howManyLost field
+				// If a player lost, increment the number of rounds the player lost so far.
 				player.incrementHowManyLost();
 			}
-			// Update the result for the round
+			// Store the most recent round result.
 			player.updateResult(playerWon);
 		}
 	}
@@ -235,6 +243,7 @@ public class BlackJack {
 	 * TODO This method should print the statistic of the game when it ends
 	 */
 	protected void printGameStatistics() {
+		// Loop through each player in a list.
 		for (Player player : players) {
 			// Print the static
 			System.out.println(player.getName() + " won " + player.getHowManyWon() + " times and lost "

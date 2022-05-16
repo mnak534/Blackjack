@@ -19,7 +19,7 @@ public class RandomStrategy implements BotStrategy {
 
 		// Create a Random instance
 		Random rand = new Random();
-		// Obtain a random integer between 0-1 (inclusive)
+		// Obtain a random integer that is 0 or 1
 		int n = rand.nextInt(2);
 
 		// n is 0 or 1 for 50-50 chance
